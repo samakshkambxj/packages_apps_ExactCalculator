@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+      SPDX-License-Identifier: Apache-2.0
+      iOS calculator palette (Apple values: digits #333333, functions
+      #A5A5A5, operators #FF9F0A) used by the portrait keypad.
+-->
+<resources>
+    <color name="ios_black">#000000</color>
+    <color name="ios_white">#FFFFFF</color>
+    <color name="ios_digit_bg">#333333</color>
+    <color name="ios_digit_text">#FFFFFF</color>
+    <color name="ios_func_bg">#A5A5A5</color>
+    <color name="ios_func_text">#000000</color>
+    <color name="ios_op_bg">#FF9F0A</color>
+    <color name="ios_op_text">#FFFFFF</color>
+    <color name="ios_display_formula">#B2B2B2</color>
+</resources>

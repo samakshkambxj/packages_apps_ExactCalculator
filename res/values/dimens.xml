@@ -27,7 +27,7 @@
     <dimen name="result_padding_bottom">32dip</dimen>
     <dimen name="result_padding_start">16dip</dimen>
     <dimen name="result_padding_end">16dip</dimen>
-    <dimen name="result_textsize">32dip</dimen>
+    <dimen name="result_textsize">44dip</dimen>
 
     <!-- Pads -->
     <dimen name="pads_horizontal_edge_padding">10dp</dimen>

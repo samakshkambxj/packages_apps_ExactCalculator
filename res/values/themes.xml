@@ -6,17 +6,26 @@
 <resources>
 
     <style name="Theme" parent="Theme.Material3Expressive.DayNight">
-        <item name="android:statusBarColor">@color/display_background_color</item>
+        <item name="android:statusBarColor">@color/ios_black</item>
         <item name="colorPrimary">@color/modern_primary</item>
         <item name="colorSecondary">@color/modern_primary</item>
         <item name="colorTertiary">@color/modern_primary</item>
-        <item name="calculatorDisplayStartColor">#D8F1EC</item>
-        <item name="calculatorDisplayEndColor">#F7FAF8</item>
-        <item name="calculatorFormulaTextColor">#477C73</item>
-        <item name="calculatorResultTextColor">#123E37</item>
-        <item name="android:windowLightStatusBar">?isLightTheme</item>
-        <item name="android:navigationBarColor">?colorSurface</item>
-        <item name="android:windowLightNavigationBar">?isLightTheme</item>
+        <item name="calculatorDisplayStartColor">@color/ios_black</item>
+        <item name="calculatorDisplayEndColor">@color/ios_black</item>
+        <item name="calculatorFormulaTextColor">@color/ios_display_formula</item>
+        <item name="calculatorResultTextColor">@color/ios_white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/ios_black</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <!-- iOS keypad palette (always dark, like the iOS calculator). -->
+        <item name="iosDigitBackground">@color/ios_digit_bg</item>
+        <item name="iosDigitForeground">@color/ios_digit_text</item>
+        <item name="iosFuncBackground">@color/ios_func_bg</item>
+        <item name="iosFuncForeground">@color/ios_func_text</item>
+        <item name="iosOperatorBackground">@color/ios_op_bg</item>
+        <item name="iosOperatorForeground">@color/ios_op_text</item>
+        <item name="iosOperatorActiveBackground">@color/ios_op_text</item>
+        <item name="iosOperatorActiveForeground">@color/ios_op_bg</item>
     </style>
 
     <style name="Theme.Calculator">
@@ -85,5 +94,14 @@
         <item name="android:navigationBarColor">#F2E5CF</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
+        <!-- Vintage keeps the pre-iOS keypad palette. -->
+        <item name="iosDigitBackground">?colorSurfaceContainer</item>
+        <item name="iosDigitForeground">?colorOnSurface</item>
+        <item name="iosFuncBackground">?colorSurfaceVariant</item>
+        <item name="iosFuncForeground">?colorOnSurfaceVariant</item>
+        <item name="iosOperatorBackground">?colorSecondaryContainer</item>
+        <item name="iosOperatorForeground">?colorOnSecondaryContainer</item>
+        <item name="iosOperatorActiveBackground">?colorSecondaryContainer</item>
+        <item name="iosOperatorActiveForeground">?colorOnSecondaryContainer</item>
     </style>
 </resources>

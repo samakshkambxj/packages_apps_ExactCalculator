@@ -228,6 +228,9 @@ public class Calculator extends AppCompatActivity
 
     private GlassNavState mNavState;
 
+    /** Currently pending binary operator key, shown inverted iOS-style. */
+    private View mPendingOperator;
+
     private View[] mInvertibleButtons;
     private View[] mInverseButtons;
 
@@ -317,6 +320,12 @@ public class Calculator extends AppCompatActivity
 
         setContentView(R.layout.activity_calculator);
         setupEdgeToEdge();
+        if (!ThemeUtils.isVintage(this)) {
+            // iOS look: no title header, pure black canvas.
+            findViewById(R.id.toolbar).setVisibility(View.GONE);
+            findViewById(R.id.main_calculator).setBackgroundColor(Color.BLACK);
+            findViewById(R.id.input_pad).setBackgroundColor(Color.BLACK);
+        }
         setSupportActionBar(findViewById(R.id.toolbar));
 
         // Hide all default options in the ActionBar.
@@ -621,6 +630,7 @@ public class Calculator extends AppCompatActivity
         // we don't have to worry about subsequent asynchronous completion.
         // Requested in-progress evaluations are handled below.
         cancelUnrequested();
+        clearPendingOperator();
 
         switch (keyCode) {
             case KeyEvent.KEYCODE_NUMPAD_ENTER:
@@ -782,9 +792,14 @@ public class Calculator extends AppCompatActivity
 
         final int id = view.getId();
         if (id == R.id.eq) {
+            clearPendingOperator();
             onEquals();
         } else if (id == R.id.del) {
+            clearPendingOperator();
             onDelete();
+        } else if (id == R.id.clear) {
+            clearPendingOperator();
+            onClear();
         } else if (id == R.id.toggle_inv) {
             final boolean selected = !mInverseToggle.isSelected();
             mInverseToggle.setSelected(selected);
@@ -812,6 +827,12 @@ public class Calculator extends AppCompatActivity
             return;
         } else {
             cancelIfEvaluating(false);
+            if (KeyMaps.isBinary(id)) {
+                // iOS-style: keep the pending operator key inverted.
+                setPendingOperator(view);
+            } else {
+                clearPendingOperator();
+            }
             if (haveUnprocessed()) {
                 // For consistency, append as uninterpreted characters.
                 // This may actually be useful for a left parenthesis.
@@ -820,6 +841,27 @@ public class Calculator extends AppCompatActivity
                 addExplicitKeyToExpr(id);
                 redisplayAfterFormulaChange();
             }
+        }
+    }
+
+    /**
+     * iOS-style pending-operator highlight: the tapped operator key renders
+     * inverted (white key, orange label) until the next keypress.
+     */
+    private void setPendingOperator(View operator) {
+        if (mPendingOperator != null && mPendingOperator != operator) {
+            mPendingOperator.setSelected(false);
+        }
+        mPendingOperator = operator;
+        if (mPendingOperator != null) {
+            mPendingOperator.setSelected(true);
+        }
+    }
+
+    private void clearPendingOperator() {
+        if (mPendingOperator != null) {
+            mPendingOperator.setSelected(false);
+            mPendingOperator = null;
         }
     }
 
@@ -976,6 +1018,7 @@ public class Calculator extends AppCompatActivity
     }
 
     private void onClear() {
+        clearPendingOperator();
         if (mEvaluator.getExpr(Evaluator.MAIN_INDEX).isEmpty() && !haveUnprocessed()) {
             return;
         }
