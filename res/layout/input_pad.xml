@@ -200,6 +200,7 @@
         style="@style/PadButtonStyle"
         android:text="@string/digit_0"
         android:theme="@style/Theme.Button.IosNumeric"
+        app:iosCircle="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/columnGuide2"
         app:layout_constraintStart_toStartOf="parent"

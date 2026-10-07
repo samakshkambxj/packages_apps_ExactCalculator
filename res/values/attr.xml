@@ -16,6 +16,11 @@
     <attr name="calculatorFormulaTextColor" format="color" />
     <attr name="calculatorResultTextColor" format="color" />
 
+    <declare-styleable name="IosButton">
+        <!-- True circle (square cell). False keeps the measured shape, e.g. the wide "0" stadium. -->
+        <attr name="iosCircle" format="boolean" />
+    </declare-styleable>
+
     <!-- iOS keypad palette. Modern themes use fixed iOS colors; the vintage
          theme maps these onto its own palette to preserve the old style. -->
     <attr name="iosDigitBackground" format="color" />
