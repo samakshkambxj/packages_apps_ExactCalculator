@@ -30,12 +30,14 @@ jobs:
         run: |
           echo "Searching for generated APK..."
           find . -type f -name "*.apk" -print
+          mkdir -p ./artifacts
+          cp $(find . -type f -path "*build/outputs/apk/debug/*.apk" | head -1) ./artifacts/MaxxOS-ExactCalculator.apk
+          ls -la ./artifacts
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: MaxxOS-ExactCalculator-staging-${{ github.run_number }}
-          path: |
-            **/build/outputs/apk/debug/*.apk
+          path: ./artifacts/MaxxOS-ExactCalculator.apk
           if-no-files-found: error
           retention-days: 14
